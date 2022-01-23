@@ -4,12 +4,12 @@ saldo = 0
 sprzedaz = 0
 zakup = 0
 magazyn = {}         # slownik
-historia = []        # lista wyswietlana w przeglad
-komentarz = True     # przydatne do anulowania transakcji na poziomie komentarza w saldzie
-wartosc = 0          # poczatkowe saldo na koncie
-stan_konta = 0       # tu przechowuje aktualne saldo
-cena = 0             # def ceny produktu
-wartosc_produkt = 0  # wartosc kupionego produktu (cena * ilosc)
+historia = []        # lista wszystkich operacji
+komentarz = True
+wartosc = 0          # poczatkowe saldo
+stan_konta = 0       # aktualne saldo
+cena = 0
+wartosc_produkt = 0  # cena * ilosc
 
 while True:
     wybor = str(input().strip())    # strip - zwraca czysty ciag znakow
@@ -142,9 +142,3 @@ if sys.argv[1] == "przeglad":
         for element in wiersz:
             print(element)
     print("stop")
-
-"""
-elif sys.argv[1] =="przeglad":
-    numerowana_baza = enumerate(rejestr_zdarzen)
-    for index, aktywnosc in enumerate(rejestr_zdarzen[int(sys.argv[2]):int(sys.argv[3])]):
-        print(aktywnosc)"""
