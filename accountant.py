@@ -12,7 +12,7 @@ cena = 0             # def ceny produktu
 wartosc_produkt = 0  # wartosc kupionego produktu (cena * ilosc)
 
 while True:
-    wybor = str(input().strip())    # strip, zwraca czysty ciag znakow
+    wybor = str(input().strip())    # strip - zwraca czysty ciag znakow
     if wybor not in akcja:
         print(f'Zły wybor. {wybor} Jeszcze raz')
         continue
@@ -106,6 +106,7 @@ if sys.argv[1] == "zakup":
     ilosc = int(sys.argv[4])
     stan_konta -= cena * ilosc
     wartosc_produkt = cena * ilosc
+    magazyn[produkt] += ilosc
     historia_zakup = (wybor,produkt,cena,ilosc)
     historia.append(historia_zakup)
 
@@ -141,3 +142,9 @@ if sys.argv[1] == "przeglad":
         for element in wiersz:
             print(element)
     print("stop")
+
+"""
+elif sys.argv[1] =="przeglad":
+    numerowana_baza = enumerate(rejestr_zdarzen)
+    for index, aktywnosc in enumerate(rejestr_zdarzen[int(sys.argv[2]):int(sys.argv[3])]):
+        print(aktywnosc)"""
