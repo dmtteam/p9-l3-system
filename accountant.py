@@ -1,18 +1,18 @@
 import sys
 akcja= ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "przeglad", "stop"]
-saldo = 0
-sprzedaz = 0
-zakup = 0
-magazyn = {}         # slownik
-historia = []        # lista wszystkich operacji
-komentarz = True
-wartosc = 0          # poczatkowe saldo
-stan_konta = 0       # aktualne saldo
-cena = 0
-wartosc_produkt = 0  # cena * ilosc
+saldo = 0            # balance
+sprzedaz = 0         # sale
+zakup = 0            # purchase
+magazyn = {}         # dict
+historia = []        # all operations
+komentarz = True     # comment
+wartosc = 0          # initial balance
+stan_konta = 0       # current balance
+cena = 0             # initial price
+wartosc_produkt = 0  # price * quantity
 
 while True:
-    wybor = str(input().strip())    # strip - zwraca czysty ciag znakow
+    wybor = str(input().strip())    # strip - returns pure string
     if wybor not in akcja:
         print(f'Zły wybor. {wybor} Jeszcze raz')
         continue
