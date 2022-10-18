@@ -1,5 +1,5 @@
 import sys
-akcja= ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "przeglad", "stop"]
+akcja = ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "przeglad", "stop"]
 saldo = 0            # balance
 sprzedaz = 0         # sale
 zakup = 0            # purchase
@@ -29,7 +29,7 @@ while True:
             print("Transaction canceled!")
             continue
         stan_konta += wartosc
-        historia_saldo = (wybor,wartosc,komentarz)
+        historia_saldo = (wybor, wartosc, komentarz)
         historia.append(historia_saldo)
         continue
     if wybor == "zakup":
@@ -51,7 +51,7 @@ while True:
             magazyn[produkt] += ilosc
         else:
             magazyn[produkt] = ilosc
-        historia_zakup = (wybor,produkt,cena,ilosc)
+        historia_zakup = (wybor, produkt, cena, ilosc)
         historia.append(historia_zakup)
         continue
     if wybor == "sprzedaz":
@@ -73,11 +73,11 @@ while True:
         wartosc_produkt = cena * ilosc
         stan_konta += cena * ilosc
         magazyn[produkt] -= ilosc
-        historia_sprzedaz = (wybor,produkt,cena,ilosc)
+        historia_sprzedaz = (wybor, produkt, cena, ilosc)
         historia.append(historia_sprzedaz)
         continue
     if wybor == "konto":
-        print (f'aktualny stan konta to: {stan_konta}')
+        print(f'aktualny stan konta to: {stan_konta}')
         continue
     if wybor == "magazyn":
         for wiersz in magazyn:
@@ -107,7 +107,7 @@ if sys.argv[1] == "zakup":
     stan_konta -= cena * ilosc
     wartosc_produkt = cena * ilosc
     magazyn[produkt] += ilosc
-    historia_zakup = (wybor,produkt,cena,ilosc)
+    historia_zakup = (wybor, produkt, cena, ilosc)
     historia.append(historia_zakup)
 
 if sys.argv[1] == "sprzedaz":
@@ -117,7 +117,7 @@ if sys.argv[1] == "sprzedaz":
     wartosc_produkt = cena * ilosc
     stan_konta += cena * ilosc
     magazyn[produkt] -= ilosc
-    historia_sprzedaz = (wybor,produkt,cena,ilosc)
+    historia_sprzedaz = (wybor, produkt, cena, ilosc)
     historia.append(historia_sprzedaz)
 
 if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
