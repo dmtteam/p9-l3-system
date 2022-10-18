@@ -14,19 +14,19 @@ wartosc_produkt = 0  # price * quantity
 while True:
     wybor = str(input().strip())    # strip - returns pure string
     if wybor not in akcja:
-        print(f'Zły wybor. {wybor} Jeszcze raz')
+        print(f'Bad choice. {wybor} Try again!')
         continue
     if wybor == "saldo":
         wartosc = int(input())
         if wartosc == 0:
-            print('Wpłać ciut więcej ;)')
+            print('Donate a bit more ;)')
             continue
         if stan_konta + wartosc <= 0:
-            print('Zla kwota, brak mozliwosci wyplaty')
+            print('Wrong amount, no payout possible!')
             continue
         komentarz = str(input())
         if komentarz == "stop":
-            print("Transakcja anulowana")
+            print("Transaction canceled!")
             continue
         stan_konta += wartosc
         historia_saldo = (wybor,wartosc,komentarz)
