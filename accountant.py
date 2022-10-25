@@ -36,14 +36,14 @@ while True:
         produkt = str(input())
         cena = int(input())
         if cena <= 0:
-            print('Zla cena!')
+            print('Bad price!')
             continue
         if cena > stan_konta:
             print('Brak srodkow na zakup')
             break
         ilosc = int(input())
         if ilosc <= 0 or ilosc * cena > stan_konta:
-            print('Brak srodkow na zakup')
+            print('No funds to purchase')
             break
         stan_konta -= cena * ilosc
         wartosc_produkt = cena * ilosc
@@ -57,11 +57,11 @@ while True:
     if wybor == "sprzedaz":
         produkt = str(input())
         if produkt not in magazyn:
-            print('Brak produktu w magazynie!')
+            print('No product in stock!')
             continue
         cena = int(input())
         if cena <= 0:
-            print('Zla cena!')
+            print('Bad price!')
             continue
         ilosc = int(input())
         if ilosc <= 0:
