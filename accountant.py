@@ -68,7 +68,7 @@ while True:
             print('Zła ilość!')
             continue
         if magazyn[produkt] < ilosc:
-            print('Brak takiej ilosci w magazynie')
+            print('No such quantity in stock')
             continue
         wartosc_produkt = cena * ilosc
         stan_konta += cena * ilosc
@@ -77,7 +77,7 @@ while True:
         historia.append(historia_sprzedaz)
         continue
     if wybor == "konto":
-        print(f'aktualny stan konta to: {stan_konta}')
+        print(f'Current account balance is: {stan_konta}')
         continue
     if wybor == "magazyn":
         for wiersz in magazyn:
