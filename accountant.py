@@ -8,7 +8,7 @@ historia = []        # all operations
 komentarz = True     # comment
 wartosc = 0          # initial balance
 stan_konta = 0       # current balance
-cena = 0             # initial price
+price = 0             # initial price
 wartosc_produkt = 0  # price * quantity
 
 while True:
@@ -34,24 +34,24 @@ while True:
         continue
     if wybor == "zakup":
         produkt = str(input())
-        cena = int(input())
-        if cena <= 0:
+        price = int(input())
+        if price <= 0:
             print('Bad price!')
             continue
-        if cena > stan_konta:
+        if price > stan_konta:
             print('Brak srodkow na zakup')
             break
         ilosc = int(input())
-        if ilosc <= 0 or ilosc * cena > stan_konta:
+        if ilosc <= 0 or ilosc * price > stan_konta:
             print('No funds to purchase')
             break
-        stan_konta -= cena * ilosc
-        wartosc_produkt = cena * ilosc
+        stan_konta -= price * ilosc
+        wartosc_produkt = price * ilosc
         if produkt in magazyn:
             magazyn[produkt] += ilosc
         else:
             magazyn[produkt] = ilosc
-        historia_zakup = (wybor, produkt, cena, ilosc)
+        historia_zakup = (wybor, produkt, price, ilosc)
         historia.append(historia_zakup)
         continue
     if wybor == "sprzedaz":
@@ -59,8 +59,8 @@ while True:
         if produkt not in magazyn:
             print('No product in stock!')
             continue
-        cena = int(input())
-        if cena <= 0:
+        price = int(input())
+        if price <= 0:
             print('Bad price!')
             continue
         ilosc = int(input())
@@ -70,10 +70,10 @@ while True:
         if magazyn[produkt] < ilosc:
             print('No such quantity in stock')
             continue
-        wartosc_produkt = cena * ilosc
-        stan_konta += cena * ilosc
+        wartosc_produkt = price * ilosc
+        stan_konta += price * ilosc
         magazyn[produkt] -= ilosc
-        historia_sprzedaz = (wybor, produkt, cena, ilosc)
+        historia_sprzedaz = (wybor, produkt, price, ilosc)
         historia.append(historia_sprzedaz)
         continue
     if wybor == "konto":
@@ -102,22 +102,22 @@ if sys.argv[1] == "saldo":
 
 if sys.argv[1] == "zakup":
     produkt = str(sys.argv[2])
-    cena = int(sys.argv[3])
+    price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
-    stan_konta -= cena * ilosc
-    wartosc_produkt = cena * ilosc
+    stan_konta -= price * ilosc
+    wartosc_produkt = price * ilosc
     magazyn[produkt] += ilosc
-    historia_zakup = (wybor, produkt, cena, ilosc)
+    historia_zakup = (wybor, produkt, price, ilosc)
     historia.append(historia_zakup)
 
 if sys.argv[1] == "sprzedaz":
     produkt = str(sys.argv[2])
-    cena = int(sys.argv[3])
+    price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
-    wartosc_produkt = cena * ilosc
-    stan_konta += cena * ilosc
+    wartosc_produkt = price * ilosc
+    stan_konta += price * ilosc
     magazyn[produkt] -= ilosc
-    historia_sprzedaz = (wybor, produkt, cena, ilosc)
+    historia_sprzedaz = (wybor, produkt, price, ilosc)
     historia.append(historia_sprzedaz)
 
 if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
