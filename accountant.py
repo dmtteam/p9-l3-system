@@ -12,11 +12,11 @@ price = 0             # initial price
 wartosc_produkt = 0  # price * quantity
 
 while True:
-    wybor = str(input().strip())    # strip - returns pure string
-    if wybor not in akcja:
-        print(f'Bad choice. {wybor} Try again!')
+    choice = str(input().strip())    # strip - returns pure string
+    if choice not in akcja:
+        print(f'Bad choice. {choice} Try again!')
         continue
-    if wybor == "saldo":
+    if choice == "saldo":
         wartosc = int(input())
         if wartosc == 0:
             print('Donate a bit more ;)')
@@ -29,10 +29,10 @@ while True:
             print("Transaction canceled!")
             continue
         stan_konta += wartosc
-        historia_saldo = (wybor, wartosc, komentarz)
+        historia_saldo = (choice, wartosc, komentarz)
         historia.append(historia_saldo)
         continue
-    if wybor == "zakup":
+    if choice == "zakup":
         produkt = str(input())
         price = int(input())
         if price <= 0:
@@ -51,10 +51,10 @@ while True:
             magazyn[produkt] += ilosc
         else:
             magazyn[produkt] = ilosc
-        historia_zakup = (wybor, produkt, price, ilosc)
+        historia_zakup = (choice, produkt, price, ilosc)
         historia.append(historia_zakup)
         continue
-    if wybor == "sprzedaz":
+    if choice == "sprzedaz":
         produkt = str(input())
         if produkt not in magazyn:
             print('No product in stock!')
@@ -73,31 +73,31 @@ while True:
         wartosc_produkt = price * ilosc
         stan_konta += price * ilosc
         magazyn[produkt] -= ilosc
-        historia_sprzedaz = (wybor, produkt, price, ilosc)
+        historia_sprzedaz = (choice, produkt, price, ilosc)
         historia.append(historia_sprzedaz)
         continue
-    if wybor == "konto":
+    if choice == "konto":
         print(f'Current account balance is: {stan_konta}')
         continue
-    if wybor == "magazyn":
+    if choice == "magazyn":
         for wiersz in magazyn:
             print(wiersz)
         print("stop")
         continue
-    if wybor == "przeglad":
+    if choice == "przeglad":
         for ile in historia:
             print(ile)
         continue
-    if wybor == "stop":
+    if choice == "stop":
         break
 
 # argv
-wybor = sys.argv[1]
+choice = sys.argv[1]
 if sys.argv[1] == "saldo":
     wartosc = int(sys.argv[2])
     komentarz = sys.argv[3]
     stan_konta += wartosc
-    historia_saldo = (wybor, wartosc, komentarz)
+    historia_saldo = (choice, wartosc, komentarz)
     historia.append(historia_saldo)
 
 if sys.argv[1] == "zakup":
@@ -107,7 +107,7 @@ if sys.argv[1] == "zakup":
     stan_konta -= price * ilosc
     wartosc_produkt = price * ilosc
     magazyn[produkt] += ilosc
-    historia_zakup = (wybor, produkt, price, ilosc)
+    historia_zakup = (choice, produkt, price, ilosc)
     historia.append(historia_zakup)
 
 if sys.argv[1] == "sprzedaz":
@@ -117,7 +117,7 @@ if sys.argv[1] == "sprzedaz":
     wartosc_produkt = price * ilosc
     stan_konta += price * ilosc
     magazyn[produkt] -= ilosc
-    historia_sprzedaz = (wybor, produkt, price, ilosc)
+    historia_sprzedaz = (choice, produkt, price, ilosc)
     historia.append(historia_sprzedaz)
 
 if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
