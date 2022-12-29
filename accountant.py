@@ -1,5 +1,5 @@
 import sys
-akcja = ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "przeglad", "stop"]
+action = ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "przeglad", "stop"]
 saldo = 0            # balance
 sprzedaz = 0         # sale
 zakup = 0            # purchase
@@ -13,7 +13,7 @@ wartosc_produkt = 0  # price * quantity
 
 while True:
     choice = str(input().strip())    # strip - returns pure string
-    if choice not in akcja:
+    if choice not in action:
         print(f'Bad choice. {choice} Try again!')
         continue
     if choice == "saldo":
