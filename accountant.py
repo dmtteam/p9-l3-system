@@ -5,7 +5,7 @@ sprzedaz = 0         # sale
 zakup = 0            # purchase
 magazyn = {}         # dict
 historia = []        # all operations
-komentarz = True     # comment
+comment = True       # comment
 wartosc = 0          # initial balance
 stan_konta = 0       # current balance
 price = 0             # initial price
@@ -24,12 +24,12 @@ while True:
         if stan_konta + wartosc <= 0:
             print('Wrong amount, no payout possible!')
             continue
-        komentarz = str(input())
-        if komentarz == "stop":
+        comment = str(input())
+        if comment == "stop":
             print("Transaction canceled!")
             continue
         stan_konta += wartosc
-        historia_saldo = (choice, wartosc, komentarz)
+        historia_saldo = (choice, wartosc, comment)
         historia.append(historia_saldo)
         continue
     if choice == "zakup":
@@ -39,7 +39,7 @@ while True:
             print('Bad price!')
             continue
         if price > stan_konta:
-            print('Brak srodkow na zakup')
+            print('No funds to purchase')
             break
         ilosc = int(input())
         if ilosc <= 0 or ilosc * price > stan_konta:
@@ -65,7 +65,7 @@ while True:
             continue
         ilosc = int(input())
         if ilosc <= 0:
-            print('Zła ilość!')
+            print('Bad quantity!')
             continue
         if magazyn[produkt] < ilosc:
             print('No such quantity in stock')
@@ -95,9 +95,9 @@ while True:
 choice = sys.argv[1]
 if sys.argv[1] == "saldo":
     wartosc = int(sys.argv[2])
-    komentarz = sys.argv[3]
+    comment = sys.argv[3]
     stan_konta += wartosc
-    historia_saldo = (choice, wartosc, komentarz)
+    historia_saldo = (choice, wartosc, comment)
     historia.append(historia_saldo)
 
 if sys.argv[1] == "zakup":
