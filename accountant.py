@@ -9,7 +9,7 @@ comment = True       # comment
 wartosc = 0          # initial balance
 stan_konta = 0       # current balance
 price = 0             # initial price
-wartosc_produkt = 0  # price * quantity
+wartosc_product = 0  # price * quantity
 
 while True:
     choice = str(input().strip())    # strip - returns pure string
@@ -33,7 +33,7 @@ while True:
         historia.append(historia_saldo)
         continue
     if choice == "zakup":
-        produkt = str(input())
+        product = str(input())
         price = int(input())
         if price <= 0:
             print('Bad price!')
@@ -46,17 +46,17 @@ while True:
             print('No funds to purchase')
             break
         stan_konta -= price * ilosc
-        wartosc_produkt = price * ilosc
-        if produkt in magazyn:
-            magazyn[produkt] += ilosc
+        wartosc_product = price * ilosc
+        if product in magazyn:
+            magazyn[product] += ilosc
         else:
-            magazyn[produkt] = ilosc
-        historia_zakup = (choice, produkt, price, ilosc)
+            magazyn[product] = ilosc
+        historia_zakup = (choice, product, price, ilosc)
         historia.append(historia_zakup)
         continue
     if choice == "sprzedaz":
-        produkt = str(input())
-        if produkt not in magazyn:
+        product = str(input())
+        if product not in magazyn:
             print('No product in stock!')
             continue
         price = int(input())
@@ -67,21 +67,21 @@ while True:
         if ilosc <= 0:
             print('Bad quantity!')
             continue
-        if magazyn[produkt] < ilosc:
+        if magazyn[product] < ilosc:
             print('No such quantity in stock')
             continue
-        wartosc_produkt = price * ilosc
+        wartosc_product = price * ilosc
         stan_konta += price * ilosc
-        magazyn[produkt] -= ilosc
-        historia_sprzedaz = (choice, produkt, price, ilosc)
+        magazyn[product] -= ilosc
+        historia_sprzedaz = (choice, product, price, ilosc)
         historia.append(historia_sprzedaz)
         continue
     if choice == "konto":
         print(f'Current account balance is: {stan_konta}')
         continue
     if choice == "magazyn":
-        for wiersz in magazyn:
-            print(wiersz)
+        for line in magazyn:
+            print(line)
         print("stop")
         continue
     if choice == "przeglad":
@@ -101,28 +101,28 @@ if sys.argv[1] == "saldo":
     historia.append(historia_saldo)
 
 if sys.argv[1] == "zakup":
-    produkt = str(sys.argv[2])
+    product = str(sys.argv[2])
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
     stan_konta -= price * ilosc
-    wartosc_produkt = price * ilosc
-    magazyn[produkt] += ilosc
-    historia_zakup = (choice, produkt, price, ilosc)
+    wartosc_product = price * ilosc
+    magazyn[product] += ilosc
+    historia_zakup = (choice, product, price, ilosc)
     historia.append(historia_zakup)
 
 if sys.argv[1] == "sprzedaz":
-    produkt = str(sys.argv[2])
+    product = str(sys.argv[2])
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
-    wartosc_produkt = price * ilosc
+    wartosc_product = price * ilosc
     stan_konta += price * ilosc
-    magazyn[produkt] -= ilosc
-    historia_sprzedaz = (choice, produkt, price, ilosc)
+    magazyn[product] -= ilosc
+    historia_sprzedaz = (choice, product, price, ilosc)
     historia.append(historia_sprzedaz)
 
 if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
-    for wiersz in historia:
-        for element in wiersz:
+    for line in historia:
+        for element in line:
             print(element)
     print("stop")
 
@@ -130,15 +130,15 @@ if sys.argv[1] == "konto":
     print(stan_konta)
 
 if sys.argv[1] == "magazyn":
-    for produkt in sys.argv[2:]:
-        if produkt not in magazyn:
+    for product in sys.argv[2:]:
+        if product not in magazyn:
             stan_magazyn = 0
         else:
-            stan_magazyn = magazyn[produkt]
-        print(f'{produkt} : {stan_magazyn}')
+            stan_magazyn = magazyn[product]
+        print(f'{product} : {stan_magazyn}')
 
 if sys.argv[1] == "przeglad":
-    for wiersz in historia:
-        for element in wiersz:
+    for line in historia:
+        for element in line:
             print(element)
     print("stop")
