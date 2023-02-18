@@ -1,5 +1,5 @@
 import sys
-action = ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "przeglad", "stop"]
+action = ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "overview", "stop"]
 saldo = 0            # balance
 sprzedaz = 0         # sale
 zakup = 0            # purchase
@@ -84,7 +84,7 @@ while True:
             print(line)
         print("stop")
         continue
-    if choice == "przeglad":
+    if choice == "overview":
         for ile in historia:
             print(ile)
         continue
@@ -137,7 +137,7 @@ if sys.argv[1] == "magazyn":
             stan_magazyn = magazyn[product]
         print(f'{product} : {stan_magazyn}')
 
-if sys.argv[1] == "przeglad":
+if sys.argv[1] == "overview":
     for line in historia:
         for element in line:
             print(element)
