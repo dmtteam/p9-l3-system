@@ -4,7 +4,7 @@ saldo = 0            # balance
 sprzedaz = 0         # sale
 zakup = 0            # purchase
 magazyn = {}         # dict
-historia = []        # all operations
+history = []        # all operations
 comment = True       # comment
 wartosc = 0          # initial balance
 stan_konta = 0       # current balance
@@ -29,8 +29,8 @@ while True:
             print("Transaction canceled!")
             continue
         stan_konta += wartosc
-        historia_saldo = (choice, wartosc, comment)
-        historia.append(historia_saldo)
+        history_saldo = (choice, wartosc, comment)
+        history.append(history_saldo)
         continue
     if choice == "zakup":
         product = str(input())
@@ -51,8 +51,8 @@ while True:
             magazyn[product] += ilosc
         else:
             magazyn[product] = ilosc
-        historia_zakup = (choice, product, price, ilosc)
-        historia.append(historia_zakup)
+        history_zakup = (choice, product, price, ilosc)
+        history.append(history_zakup)
         continue
     if choice == "sprzedaz":
         product = str(input())
@@ -73,8 +73,8 @@ while True:
         wartosc_product = price * ilosc
         stan_konta += price * ilosc
         magazyn[product] -= ilosc
-        historia_sprzedaz = (choice, product, price, ilosc)
-        historia.append(historia_sprzedaz)
+        history_sprzedaz = (choice, product, price, ilosc)
+        history.append(history_sprzedaz)
         continue
     if choice == "konto":
         print(f'Current account balance is: {stan_konta}')
@@ -85,7 +85,7 @@ while True:
         print("stop")
         continue
     if choice == "overview":
-        for ile in historia:
+        for ile in history:
             print(ile)
         continue
     if choice == "stop":
@@ -97,8 +97,8 @@ if sys.argv[1] == "saldo":
     wartosc = int(sys.argv[2])
     comment = sys.argv[3]
     stan_konta += wartosc
-    historia_saldo = (choice, wartosc, comment)
-    historia.append(historia_saldo)
+    history_saldo = (choice, wartosc, comment)
+    history.append(history_saldo)
 
 if sys.argv[1] == "zakup":
     product = str(sys.argv[2])
@@ -107,8 +107,8 @@ if sys.argv[1] == "zakup":
     stan_konta -= price * ilosc
     wartosc_product = price * ilosc
     magazyn[product] += ilosc
-    historia_zakup = (choice, product, price, ilosc)
-    historia.append(historia_zakup)
+    history_zakup = (choice, product, price, ilosc)
+    history.append(history_zakup)
 
 if sys.argv[1] == "sprzedaz":
     product = str(sys.argv[2])
@@ -117,11 +117,11 @@ if sys.argv[1] == "sprzedaz":
     wartosc_product = price * ilosc
     stan_konta += price * ilosc
     magazyn[product] -= ilosc
-    historia_sprzedaz = (choice, product, price, ilosc)
-    historia.append(historia_sprzedaz)
+    history_sprzedaz = (choice, product, price, ilosc)
+    history.append(history_sprzedaz)
 
 if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
-    for line in historia:
+    for line in history:
         for element in line:
             print(element)
     print("stop")
@@ -138,7 +138,7 @@ if sys.argv[1] == "magazyn":
         print(f'{product} : {stan_magazyn}')
 
 if sys.argv[1] == "overview":
-    for line in historia:
+    for line in history:
         for element in line:
             print(element)
     print("stop")
