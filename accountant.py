@@ -4,11 +4,11 @@ saldo = 0            # balance
 sprzedaz = 0         # sale
 zakup = 0            # purchase
 magazyn = {}         # dict
-history = []        # all operations
+history = []         # all operations
 comment = True       # comment
 wartosc = 0          # initial balance
-stan_konta = 0       # current balance
-price = 0             # initial price
+current_balance = 0  # cash
+price = 0            # initial price
 wartosc_product = 0  # price * quantity
 
 while True:
@@ -21,14 +21,14 @@ while True:
         if wartosc == 0:
             print('Donate a bit more ;)')
             continue
-        if stan_konta + wartosc <= 0:
+        if current_balance + wartosc <= 0:
             print('Wrong amount, no payout possible!')
             continue
         comment = str(input())
         if comment == "stop":
             print("Transaction canceled!")
             continue
-        stan_konta += wartosc
+        current_balance += wartosc
         history_saldo = (choice, wartosc, comment)
         history.append(history_saldo)
         continue
@@ -38,14 +38,14 @@ while True:
         if price <= 0:
             print('Bad price!')
             continue
-        if price > stan_konta:
+        if price > current_balance:
             print('No funds to purchase')
             break
         ilosc = int(input())
-        if ilosc <= 0 or ilosc * price > stan_konta:
+        if ilosc <= 0 or ilosc * price > current_balance:
             print('No funds to purchase')
             break
-        stan_konta -= price * ilosc
+        current_balance -= price * ilosc
         wartosc_product = price * ilosc
         if product in magazyn:
             magazyn[product] += ilosc
@@ -71,13 +71,13 @@ while True:
             print('No such quantity in stock')
             continue
         wartosc_product = price * ilosc
-        stan_konta += price * ilosc
+        current_balance += price * ilosc
         magazyn[product] -= ilosc
         history_sprzedaz = (choice, product, price, ilosc)
         history.append(history_sprzedaz)
         continue
     if choice == "konto":
-        print(f'Current account balance is: {stan_konta}')
+        print(f'Current account balance is: {current_balance}')
         continue
     if choice == "magazyn":
         for line in magazyn:
@@ -96,7 +96,7 @@ choice = sys.argv[1]
 if sys.argv[1] == "saldo":
     wartosc = int(sys.argv[2])
     comment = sys.argv[3]
-    stan_konta += wartosc
+    current_balance += wartosc
     history_saldo = (choice, wartosc, comment)
     history.append(history_saldo)
 
@@ -104,7 +104,7 @@ if sys.argv[1] == "zakup":
     product = str(sys.argv[2])
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
-    stan_konta -= price * ilosc
+    current_balance -= price * ilosc
     wartosc_product = price * ilosc
     magazyn[product] += ilosc
     history_zakup = (choice, product, price, ilosc)
@@ -115,7 +115,7 @@ if sys.argv[1] == "sprzedaz":
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
     wartosc_product = price * ilosc
-    stan_konta += price * ilosc
+    current_balance += price * ilosc
     magazyn[product] -= ilosc
     history_sprzedaz = (choice, product, price, ilosc)
     history.append(history_sprzedaz)
@@ -127,7 +127,7 @@ if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
     print("stop")
 
 if sys.argv[1] == "konto":
-    print(stan_konta)
+    print(current_balance)
 
 if sys.argv[1] == "magazyn":
     for product in sys.argv[2:]:
