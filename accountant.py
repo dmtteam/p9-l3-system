@@ -1,8 +1,8 @@
 import sys
-action = ["saldo", "zakup", "sprzedaz", "konto", "magazyn", "overview", "stop"]
+action = ["saldo", "purchase", "sprzedaz", "konto", "magazyn", "overview", "stop"]
 saldo = 0            # balance
 sprzedaz = 0         # sale
-zakup = 0            # purchase
+purchase = 0            # purchase
 magazyn = {}         # dict
 history = []         # all operations
 comment = True       # comment
@@ -32,7 +32,7 @@ while True:
         history_saldo = (choice, wartosc, comment)
         history.append(history_saldo)
         continue
-    if choice == "zakup":
+    if choice == "purchase":
         product = str(input())
         price = int(input())
         if price <= 0:
@@ -51,8 +51,8 @@ while True:
             magazyn[product] += ilosc
         else:
             magazyn[product] = ilosc
-        history_zakup = (choice, product, price, ilosc)
-        history.append(history_zakup)
+        history_purchase = (choice, product, price, ilosc)
+        history.append(history_purchase)
         continue
     if choice == "sprzedaz":
         product = str(input())
@@ -100,15 +100,15 @@ if sys.argv[1] == "saldo":
     history_saldo = (choice, wartosc, comment)
     history.append(history_saldo)
 
-if sys.argv[1] == "zakup":
+if sys.argv[1] == "purchase":
     product = str(sys.argv[2])
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
     current_balance -= price * ilosc
     wartosc_product = price * ilosc
     magazyn[product] += ilosc
-    history_zakup = (choice, product, price, ilosc)
-    history.append(history_zakup)
+    history_purchase = (choice, product, price, ilosc)
+    history.append(history_purchase)
 
 if sys.argv[1] == "sprzedaz":
     product = str(sys.argv[2])
@@ -120,7 +120,7 @@ if sys.argv[1] == "sprzedaz":
     history_sprzedaz = (choice, product, price, ilosc)
     history.append(history_sprzedaz)
 
-if sys.argv[1] in ("saldo", "zakup", "sprzedaz"):
+if sys.argv[1] in ("saldo", "purchase", "sprzedaz"):
     for line in history:
         for element in line:
             print(element)
