@@ -2,14 +2,14 @@ import sys
 action = ["saldo", "purchase", "sprzedaz", "konto", "magazyn", "overview", "stop"]
 saldo = 0            # balance
 sprzedaz = 0         # sale
-purchase = 0            # purchase
+purchase = 0         # purchase
 magazyn = {}         # dict
 history = []         # all operations
 comment = True       # comment
 wartosc = 0          # initial balance
 current_balance = 0  # cash
 price = 0            # initial price
-wartosc_product = 0  # price * quantity
+value_product = 0    # price * quantity
 
 while True:
     choice = str(input().strip())    # strip - returns pure string
@@ -46,7 +46,7 @@ while True:
             print('No funds to purchase')
             break
         current_balance -= price * ilosc
-        wartosc_product = price * ilosc
+        value_product = price * ilosc
         if product in magazyn:
             magazyn[product] += ilosc
         else:
@@ -70,7 +70,7 @@ while True:
         if magazyn[product] < ilosc:
             print('No such quantity in stock')
             continue
-        wartosc_product = price * ilosc
+        value_product = price * ilosc
         current_balance += price * ilosc
         magazyn[product] -= ilosc
         history_sprzedaz = (choice, product, price, ilosc)
@@ -105,7 +105,7 @@ if sys.argv[1] == "purchase":
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
     current_balance -= price * ilosc
-    wartosc_product = price * ilosc
+    value_product = price * ilosc
     magazyn[product] += ilosc
     history_purchase = (choice, product, price, ilosc)
     history.append(history_purchase)
@@ -114,7 +114,7 @@ if sys.argv[1] == "sprzedaz":
     product = str(sys.argv[2])
     price = int(sys.argv[3])
     ilosc = int(sys.argv[4])
-    wartosc_product = price * ilosc
+    value_product = price * ilosc
     current_balance += price * ilosc
     magazyn[product] -= ilosc
     history_sprzedaz = (choice, product, price, ilosc)
