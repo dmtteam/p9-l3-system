@@ -41,17 +41,17 @@ while True:
         if price > current_balance:
             print('No funds to purchase')
             break
-        ilosc = int(input())
-        if ilosc <= 0 or ilosc * price > current_balance:
+        quantity = int(input())
+        if quantity <= 0 or quantity * price > current_balance:
             print('No funds to purchase')
             break
-        current_balance -= price * ilosc
-        value_product = price * ilosc
+        current_balance -= price * quantity
+        value_product = price * quantity
         if product in magazyn:
-            magazyn[product] += ilosc
+            magazyn[product] += quantity
         else:
-            magazyn[product] = ilosc
-        history_purchase = (choice, product, price, ilosc)
+            magazyn[product] = quantity
+        history_purchase = (choice, product, price, quantity)
         history.append(history_purchase)
         continue
     if choice == "sprzedaz":
@@ -63,17 +63,17 @@ while True:
         if price <= 0:
             print('Bad price!')
             continue
-        ilosc = int(input())
-        if ilosc <= 0:
+        quantity = int(input())
+        if quantity <= 0:
             print('Bad quantity!')
             continue
-        if magazyn[product] < ilosc:
+        if magazyn[product] < quantity:
             print('No such quantity in stock')
             continue
-        value_product = price * ilosc
-        current_balance += price * ilosc
-        magazyn[product] -= ilosc
-        history_sprzedaz = (choice, product, price, ilosc)
+        value_product = price * quantity
+        current_balance += price * quantity
+        magazyn[product] -= quantity
+        history_sprzedaz = (choice, product, price, quantity)
         history.append(history_sprzedaz)
         continue
     if choice == "konto":
@@ -103,21 +103,21 @@ if sys.argv[1] == "saldo":
 if sys.argv[1] == "purchase":
     product = str(sys.argv[2])
     price = int(sys.argv[3])
-    ilosc = int(sys.argv[4])
-    current_balance -= price * ilosc
-    value_product = price * ilosc
-    magazyn[product] += ilosc
-    history_purchase = (choice, product, price, ilosc)
+    quantity = int(sys.argv[4])
+    current_balance -= price * quantity
+    value_product = price * quantity
+    magazyn[product] += quantity
+    history_purchase = (choice, product, price, quantity)
     history.append(history_purchase)
 
 if sys.argv[1] == "sprzedaz":
     product = str(sys.argv[2])
     price = int(sys.argv[3])
-    ilosc = int(sys.argv[4])
-    value_product = price * ilosc
-    current_balance += price * ilosc
-    magazyn[product] -= ilosc
-    history_sprzedaz = (choice, product, price, ilosc)
+    quantity = int(sys.argv[4])
+    value_product = price * quantity
+    current_balance += price * quantity
+    magazyn[product] -= quantity
+    history_sprzedaz = (choice, product, price, quantity)
     history.append(history_sprzedaz)
 
 if sys.argv[1] in ("saldo", "purchase", "sprzedaz"):
