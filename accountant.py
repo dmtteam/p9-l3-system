@@ -1,7 +1,7 @@
 import sys
-action = ["saldo", "purchase", "sprzedaz", "konto", "magazyn", "overview", "stop"]
-saldo = 0            # balance
-sprzedaz = 0         # sale
+action = ["saldo", "purchase", "sale", "konto", "magazyn", "overview", "stop"]
+saldo = 0            # initial balance
+sale = 0             # initial sale
 purchase = 0         # purchase
 magazyn = {}         # dict
 history = []         # all operations
@@ -54,7 +54,7 @@ while True:
         history_purchase = (choice, product, price, quantity)
         history.append(history_purchase)
         continue
-    if choice == "sprzedaz":
+    if choice == "sale":
         product = str(input())
         if product not in magazyn:
             print('No product in stock!')
@@ -73,8 +73,8 @@ while True:
         value_product = price * quantity
         current_balance += price * quantity
         magazyn[product] -= quantity
-        history_sprzedaz = (choice, product, price, quantity)
-        history.append(history_sprzedaz)
+        history_sale = (choice, product, price, quantity)
+        history.append(history_sale)
         continue
     if choice == "konto":
         print(f'Current account balance is: {current_balance}')
@@ -110,17 +110,17 @@ if sys.argv[1] == "purchase":
     history_purchase = (choice, product, price, quantity)
     history.append(history_purchase)
 
-if sys.argv[1] == "sprzedaz":
+if sys.argv[1] == "sale":
     product = str(sys.argv[2])
     price = int(sys.argv[3])
     quantity = int(sys.argv[4])
     value_product = price * quantity
     current_balance += price * quantity
     magazyn[product] -= quantity
-    history_sprzedaz = (choice, product, price, quantity)
-    history.append(history_sprzedaz)
+    history_sale = (choice, product, price, quantity)
+    history.append(history_sale)
 
-if sys.argv[1] in ("saldo", "purchase", "sprzedaz"):
+if sys.argv[1] in ("saldo", "purchase", "sale"):
     for line in history:
         for element in line:
             print(element)
