@@ -6,7 +6,7 @@ purchase = 0         # purchase
 magazyn = {}         # dict
 history = []         # all operations
 comment = True       # comment
-wartosc = 0          # initial balance
+value = 0            # balance value entered
 current_balance = 0  # cash
 price = 0            # initial price
 value_product = 0    # price * quantity
@@ -17,19 +17,19 @@ while True:
         print(f'Bad choice. {choice} Try again!')
         continue
     if choice == "saldo":
-        wartosc = int(input())
-        if wartosc == 0:
+        value = int(input())
+        if value == 0:
             print('Donate a bit more ;)')
             continue
-        if current_balance + wartosc <= 0:
+        if current_balance + value <= 0:
             print('Wrong amount, no payout possible!')
             continue
         comment = str(input())
         if comment == "stop":
             print("Transaction canceled!")
             continue
-        current_balance += wartosc
-        history_saldo = (choice, wartosc, comment)
+        current_balance += value
+        history_saldo = (choice, value, comment)
         history.append(history_saldo)
         continue
     if choice == "purchase":
@@ -94,10 +94,10 @@ while True:
 # argv
 choice = sys.argv[1]
 if sys.argv[1] == "saldo":
-    wartosc = int(sys.argv[2])
+    value = int(sys.argv[2])
     comment = sys.argv[3]
-    current_balance += wartosc
-    history_saldo = (choice, wartosc, comment)
+    current_balance += value
+    history_saldo = (choice, value, comment)
     history.append(history_saldo)
 
 if sys.argv[1] == "purchase":
