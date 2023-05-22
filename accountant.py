@@ -1,5 +1,5 @@
 import sys
-action = ["saldo", "purchase", "sale", "konto", "magazyn", "overview", "stop"]
+action = ["saldo", "purchase", "sale", "account", "magazyn", "overview", "stop"]
 saldo = 0            # initial balance
 sale = 0             # initial sale
 purchase = 0         # purchase
@@ -14,7 +14,7 @@ value_product = 0    # price * quantity
 while True:
     choice = str(input().strip())    # strip - returns pure string
     if choice not in action:
-        print(f'Bad choice. {choice} Try again!')
+        print(f'Bad choice. {choice} Please try again!')
         continue
     if choice == "saldo":
         value = int(input())
@@ -76,7 +76,7 @@ while True:
         history_sale = (choice, product, price, quantity)
         history.append(history_sale)
         continue
-    if choice == "konto":
+    if choice == "account":
         print(f'Current account balance is: {current_balance}')
         continue
     if choice == "magazyn":
@@ -126,7 +126,7 @@ if sys.argv[1] in ("saldo", "purchase", "sale"):
             print(element)
     print("stop")
 
-if sys.argv[1] == "konto":
+if sys.argv[1] == "account":
     print(current_balance)
 
 if sys.argv[1] == "magazyn":
