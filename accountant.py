@@ -1,9 +1,9 @@
 import sys
-action = ["saldo", "purchase", "sale", "account", "magazyn", "overview", "stop"]
+action = ["saldo", "purchase", "sale", "account", "depot", "overview", "stop"]
 saldo = 0            # initial balance
 sale = 0             # initial sale
 purchase = 0         # purchase
-magazyn = {}         # dict
+depot = {}           # dict
 history = []         # all operations
 comment = True       # comment
 value = 0            # balance value entered
@@ -47,16 +47,16 @@ while True:
             break
         current_balance -= price * quantity
         value_product = price * quantity
-        if product in magazyn:
-            magazyn[product] += quantity
+        if product in depot:
+            depot[product] += quantity
         else:
-            magazyn[product] = quantity
+            depot[product] = quantity
         history_purchase = (choice, product, price, quantity)
         history.append(history_purchase)
         continue
     if choice == "sale":
         product = str(input())
-        if product not in magazyn:
+        if product not in depot:
             print('No product in stock!')
             continue
         price = int(input())
@@ -67,20 +67,20 @@ while True:
         if quantity <= 0:
             print('Bad quantity!')
             continue
-        if magazyn[product] < quantity:
+        if depot[product] < quantity:
             print('No such quantity in stock')
             continue
         value_product = price * quantity
         current_balance += price * quantity
-        magazyn[product] -= quantity
+        depot[product] -= quantity
         history_sale = (choice, product, price, quantity)
         history.append(history_sale)
         continue
     if choice == "account":
         print(f'Current account balance is: {current_balance}')
         continue
-    if choice == "magazyn":
-        for line in magazyn:
+    if choice == "depot":
+        for line in depot:
             print(line)
         print("stop")
         continue
@@ -106,7 +106,7 @@ if sys.argv[1] == "purchase":
     quantity = int(sys.argv[4])
     current_balance -= price * quantity
     value_product = price * quantity
-    magazyn[product] += quantity
+    depot[product] += quantity
     history_purchase = (choice, product, price, quantity)
     history.append(history_purchase)
 
@@ -116,7 +116,7 @@ if sys.argv[1] == "sale":
     quantity = int(sys.argv[4])
     value_product = price * quantity
     current_balance += price * quantity
-    magazyn[product] -= quantity
+    depot[product] -= quantity
     history_sale = (choice, product, price, quantity)
     history.append(history_sale)
 
@@ -129,13 +129,13 @@ if sys.argv[1] in ("saldo", "purchase", "sale"):
 if sys.argv[1] == "account":
     print(current_balance)
 
-if sys.argv[1] == "magazyn":
+if sys.argv[1] == "depot":
     for product in sys.argv[2:]:
-        if product not in magazyn:
-            stan_magazyn = 0
+        if product not in depot:
+            stan_depot = 0
         else:
-            stan_magazyn = magazyn[product]
-        print(f'{product} : {stan_magazyn}')
+            stan_depot = depot[product]
+        print(f'{product} : {stan_depot}')
 
 if sys.argv[1] == "overview":
     for line in history:
