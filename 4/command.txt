@@ -1,2 +1,0 @@
-python accountant.py magazyn jetson raspberry arduino
-

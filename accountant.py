@@ -1,6 +1,6 @@
 import sys
 action = ["balance", "purchase", "sale", "account", "depot", "overview", "stop"]
-balance = 0            # initial balance
+balance = 0          # initial balance
 sale = 0             # initial sale
 purchase = 0         # purchase
 depot = {}           # dict

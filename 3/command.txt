@@ -1,1 +1,0 @@
-python accountant.py sprzedaz jetson 50000 4
