@@ -1,0 +1,2 @@
+python accountant.py przeglad 0 1
+

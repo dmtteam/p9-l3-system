@@ -1,6 +1,6 @@
 import sys
-action = ["saldo", "purchase", "sale", "account", "depot", "overview", "stop"]
-saldo = 0            # initial balance
+action = ["balance", "purchase", "sale", "account", "depot", "overview", "stop"]
+balance = 0            # initial balance
 sale = 0             # initial sale
 purchase = 0         # purchase
 depot = {}           # dict
@@ -16,7 +16,7 @@ while True:
     if choice not in action:
         print(f'Bad choice. {choice} Please try again!')
         continue
-    if choice == "saldo":
+    if choice == "balance":
         value = int(input())
         if value == 0:
             print('Donate a bit more ;)')
@@ -29,8 +29,8 @@ while True:
             print("Transaction canceled!")
             continue
         current_balance += value
-        history_saldo = (choice, value, comment)
-        history.append(history_saldo)
+        history_balance = (choice, value, comment)
+        history.append(history_balance)
         continue
     if choice == "purchase":
         product = str(input())
@@ -93,12 +93,12 @@ while True:
 
 # argv
 choice = sys.argv[1]
-if sys.argv[1] == "saldo":
+if sys.argv[1] == "balance":
     value = int(sys.argv[2])
     comment = sys.argv[3]
     current_balance += value
-    history_saldo = (choice, value, comment)
-    history.append(history_saldo)
+    history_balance = (choice, value, comment)
+    history.append(history_balance)
 
 if sys.argv[1] == "purchase":
     product = str(sys.argv[2])
@@ -120,7 +120,7 @@ if sys.argv[1] == "sale":
     history_sale = (choice, product, price, quantity)
     history.append(history_sale)
 
-if sys.argv[1] in ("saldo", "purchase", "sale"):
+if sys.argv[1] in ("balance", "purchase", "sale"):
     for line in history:
         for element in line:
             print(element)
